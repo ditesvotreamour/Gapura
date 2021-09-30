@@ -11,30 +11,51 @@ jQuery(document).ready(function(){
 	
 	// here all ready functions
 	
-	aola_tm_hamburger();
-	aola_tm_imgtosvg();
-	aola_tm_jarallax();
-	aola_tm_nav_bg_scroll();
-	aola_tm_contact_form();
-	aola_tm_hom_title();
-	aola_tm_portfolios();
-	aola_tm_portfolio();
-	aola_tm_isotope();
-	aola_tm_sticky_sidebar();
-	aola_tm_data_images();
+	edrea_tm_hamburger();
+	edrea_tm_imgtosvg();
+	edrea_tm_magnific_popup();
+	edrea_tm_jarallax();
+	edrea_tm_portfolio();
+	edrea_tm_nav_bg_scroll();
+	edrea_tm_anchor();
+	edrea_tm_contact_form();
+	edrea_tm_owl_carousel();
+	edrea_tm_text_animation();
+	edrea_tm_animate_text();
+	edrea_tm_projects();
+	edrea_tm_miniboxes();
+	edrea_tm_portfolio_image();
+	edrea_tm_isotope();
+	edrea_tm_totop();
+	edrea_tm_totop_myhide();
+	edrea_tm_animate_text();
+	edrea_tm_popup_blog();
+	edrea_tm_popupscroll();
+	edrea_tm_footer_fixed();
+	edrea_tm_about_animation();
+	edrea_tm_kenburn_slider();
+	edrea_tm_ripple();
+	edrea_tm_audiobox();
+	edrea_tm_audio_off();
+	edrea_tm_popup_service();
 	
 	jQuery(window).on('scroll',function(){
 		//e.preventDefault();
-		aola_tm_nav_bg_scroll();
+		edrea_tm_nav_bg_scroll();
+		edrea_tm_totop_myhide();
 	});
 	
 	jQuery(window).on('resize',function(){
-		aola_tm_portfolios();
-		aola_tm_isotope();
+		edrea_tm_miniboxes();
+		edrea_tm_isotope();
+		edrea_tm_footer_fixed();
 	});
-
-	jQuery(window).load('body', function() {
-		jQuery('.aola_tm_home_title_wrap').addClass('appear');
+	
+	jQuery(window).load('body', function(){
+		setTimeout(function(){
+        jQuery('.edrea_tm_preloader').addClass('loaded');
+    }, 1000);
+		
 	});
 	
 });
@@ -47,7 +68,7 @@ jQuery(document).ready(function(){
 // ---------------    IMAGE TO SVG    ------------------
 // -----------------------------------------------------
 
-function aola_tm_imgtosvg(){
+function edrea_tm_imgtosvg(){
 	
 	"use strict";
 	
@@ -81,12 +102,12 @@ function aola_tm_imgtosvg(){
 // ---------------  HAMBURGER  -------------------------
 // -----------------------------------------------------
 
-function aola_tm_hamburger(){
+function edrea_tm_hamburger(){
 	
 	"use strict";
 	
 	var hamburger 		= jQuery('.hamburger');
-	var mobileMenu		= jQuery('.aola_tm_mobile_menu_wrap');
+	var mobileMenu		= jQuery('.edrea_tm_mobile_menu_wrap');
 	
 	hamburger.on('click',function(){
 		var element 	= jQuery(this);
@@ -103,10 +124,57 @@ function aola_tm_hamburger(){
 }
 
 // -----------------------------------------------------
+// --------------    MAGNIFIC POPUP    -----------------
+// -----------------------------------------------------
+
+function edrea_tm_magnific_popup(){
+	
+	"use strict";
+	
+	jQuery('.open-popup-link').magnificPopup({
+		type:'inline',
+		midClick: true // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+	});
+	
+	jQuery('.gallery').each(function() { // the containers for all your galleries
+		jQuery(this).magnificPopup({
+			delegate: 'a', // the selector for gallery item
+			type: 'image',
+			gallery: {
+			  enabled:true
+			}
+		});
+	});
+	jQuery('.gallery_zoom').each(function() { // the containers for all your galleries
+		jQuery(this).magnificPopup({
+			delegate: 'a.zoom', // the selector for gallery item
+			type: 'image',
+			gallery: {
+			  enabled:true
+			},
+			removalDelay: 300,
+			mainClass: 'mfp-fade'
+		});
+		
+	});
+	jQuery('.popup-youtube').each(function() { // the containers for all your galleries
+		jQuery(this).magnificPopup({
+			//type: 'iframe',
+			disableOn: 700,
+			type: 'iframe',
+			mainClass: 'mfp-fade',
+			removalDelay: 160,
+			preloader: false,
+			fixedContentPos: false
+		});
+	});
+}
+
+// -----------------------------------------------------
 // --------------------    JARALLAX    -----------------
 // -----------------------------------------------------
 
-function aola_tm_jarallax(){
+function edrea_tm_jarallax(){
 	
 	"use strict";
 	
@@ -132,15 +200,15 @@ function aola_tm_jarallax(){
 
 // filterable 
 
-function aola_tm_portfolio(){
+function edrea_tm_portfolio(){
 
 	"use strict";
 
 	if(jQuery().isotope) {
 
 		// Needed variables
-		var list 		 = jQuery('.aola_tm_portfolio_list');
-		var filter		 = jQuery('.aola_tm_portfolio_filter');
+		var list 		 = jQuery('.edrea_tm_portfolio_list');
+		var filter		 = jQuery('.edrea_tm_portfolio_filter');
 
 		if(filter.length){
 			// Isotope Filter 
@@ -167,35 +235,114 @@ function aola_tm_portfolio(){
 	}
 }
 
+function edrea_tm_projects() {
+	
+	"use strict";
+	
+	jQuery('.edrea_tm_portfolio_animation_wrap').each(function() {
+		jQuery(this).on('mouseenter', function() {
+			if (jQuery(this).data('title')) {
+				jQuery('.edrea_tm_portfolio_titles').html(jQuery(this).data('title') + '<span class="work__cat">' + jQuery(this).data('category') + '</span>');
+				jQuery('.edrea_tm_portfolio_titles').addClass('visible');
+			}
+
+			jQuery(document).on('mousemove', function(e) {
+				jQuery('.edrea_tm_portfolio_titles').css({
+					left: e.clientX - 10,
+					top: e.clientY + 25
+				});
+			});
+		}).on('mouseleave', function() {
+			jQuery('.edrea_tm_portfolio_titles').removeClass('visible');
+		});
+//		dgf.addClass('fdg').removeClass('sde').parent().addClass('asd').children('.fdg').hide();
+	});
+}
+
+function edrea_tm_portfolio_image(){
+	
+	"use strict";
+	
+	var list			= jQuery('.edrea_tm_portfolio_list > li');
+	
+	list.each(function(){
+		
+		var element				= jQuery(this);
+		var div					= element.find('.edrea_tm_portfolio_image_main');
+		var data				= div.data('url');
+		
+		div.css({backgroundImage: 'url('+data+')'});
+	});
+//	var dataBgImgs = jQuery('*[data-bg-img]');
+//	dataBgImgs.each(function(){
+//		var dataBgImg = jQuery(this);
+//		var dataURL		= dataBgImg.data('bg-img');
+//		dataBgImg.css({backgroundImage: 'url('+dataURL+')'});
+//	});
+}
+
 // -----------------------------------------------------
 // ------------    NAV BACKGROUND  SCROLL    -----------
 // -----------------------------------------------------
 
-function aola_tm_nav_bg_scroll(){
+function edrea_tm_nav_bg_scroll(){
 	
 	"use strict";
 	
-	var header 			= jQuery('.aola_tm_header');
+	var header 			= jQuery('.edrea_tm_header');
+	var headerH 		= header.outerHeight();
+	var WH	 			= jQuery(window).height();
 	var windowScroll	= jQuery(window).scrollTop();
 	var W				= jQuery(window).width();
 	
 	if(W>1040){
 		jQuery(window).scroll(function(){
-            if(windowScroll >= '100'){
+            if(windowScroll >= WH-headerH){
                 header.addClass('scroll');
             }
             else{
                 header.removeClass('scroll');  
             }
         });
+		if(windowScroll >= WH-headerH){
+			header.addClass('scroll');
+		}
+		else{
+			header.removeClass('scroll');  
+		}
 	} 
+}
+
+// -----------------------------------------------------
+// ------------    ANCHOR NAVIGATION    ----------------
+// -----------------------------------------------------
+
+function edrea_tm_anchor(){
+	
+	"use strict";
+	
+	jQuery('.anchor_nav').onePageNav();
+	
+	var scrollOffset = 0;
+	
+	jQuery(".anchor a").on('click', function(evn){
+		evn.preventDefault();
+		jQuery('html,body').scrollTo(this.hash, this.hash, {
+			gap: { y: -scrollOffset-85 },
+			animation:{
+				duration: 1500,
+				easing: "easeInOutExpo"
+			}
+		});
+		return false;	
+	});
 }
 
 // -----------------------------------------------------
 // ----------------    CONTACT FORM    -----------------
 // -----------------------------------------------------
 
-function aola_tm_contact_form(){
+function edrea_tm_contact_form(){
 	
 	"use strict";
 	
@@ -238,101 +385,141 @@ function aola_tm_contact_form(){
 }
 
 // -----------------------------------------------------
+// --------------------    OWL CAROUSEL    -------------
+// -----------------------------------------------------
+
+function edrea_tm_owl_carousel(){
+	
+	"use strict";
+	
+	var carousel			= jQuery('.edrea_tm_services_wrap .owl-carousel');
+  	carousel.owlCarousel({
+			loop: true,
+			items: 3,
+			lazyLoad: true,
+			margin: 30,
+			autoplay: false,
+			autoplayTimeout: 6000,
+			smartSpeed: 2000,
+			dots: true,
+			nav: false,
+			navSpeed: true,
+			responsive:{
+			0:{items:1},
+			480:{items:2},
+			768:{items:3},
+			1040:{items:3},
+			1200:{items:3},
+			1600:{items:3},
+			1920:{items:3}
+		}
+	});
+	
+	jQuery('.edrea_tm_services_wrap .custom_nav > a.prev').on('click', function(){
+		carousel.trigger('prev.owl.carousel');
+		return false;
+	});
+	
+	jQuery('.edrea_tm_services_wrap .custom_nav > a.next').on('click', function(){
+		carousel.trigger('next.owl.carousel');
+		return false;
+	});
+	edrea_tm_imgtosvg();
+}
+
+// -----------------------------------------------------
 // --------------------    WOW JS    -------------------
 // -----------------------------------------------------
 
  new WOW().init();
 
-// -------------------------------------------------
-// -------------   HOME TITLE PADDING  -------------
-// -------------------------------------------------
+// -----------------------------------------------------
+// ---------------    HERO TEXT ANIMATION  --------------
+// -----------------------------------------------------
 
-function aola_tm_hom_title(){
+function edrea_tm_text_animation(){
 	
 	"use strict";
 	
-	var header			= jQuery('.aola_tm_header').outerHeight();
-	var title			= jQuery('.aola_tm_home_title_wrap');
-	var newsImage		= jQuery('.aola_tm_news_single_image');
+	var H        			= jQuery(window).height();
+	var titleHolder			= jQuery('.edrea_tm_hero_title');
+	var titleHolder2		= jQuery('.edrea_tm_hero_title_second');
+	var titleHeight			= titleHolder.outerHeight();
+	var titleHeight2		= titleHolder2.outerHeight();
+	var headerHeight		= jQuery('.edrea_tm_header').outerHeight();
 	
-	title.css({paddingTop:header});
-	newsImage.css({paddingTop:header});
+	var	height				= H/2 + titleHeight/2 - headerHeight;
+	var	height2				= H/2 + titleHeight2/2 - headerHeight;
+	
+	jQuery(window).on('scroll',function(){
+		var window_offset = jQuery(window).scrollTop();
+		titleHolder.css({opacity:1 - (window_offset/height), marginTop:(window_offset/height)*200});
+		titleHolder2.css({opacity:1 - (window_offset/height2), marginTop:(window_offset/height2)*200});
+	});
 }
 
-// -------------------------------------------------
-// -------------   PORTFOLIO -----------------------
-// -------------------------------------------------
+// -----------------------------------------------------
+// -----------------    PROGRESS BAR    ----------------
+// -----------------------------------------------------
 
-function aola_tm_portfolios(){
-	
+function tdProgress(container){
+
 	"use strict";
-	
-	var WW					= jQuery(window).width();
-	var portfolioWidth		= jQuery('.aola_tm_portfolio_home_wrap').width();
-	var item				= jQuery('.aola_tm_portfolio_home_wrap .item');
-	var itemTall			= jQuery('.aola_tm_portfolio_home_wrap .item.tall');
-	var itemWide			= jQuery('.aola_tm_portfolio_home_wrap .item.wide');
-	var mTall				= jQuery('.aola_tm_portfolio_home_wrap .item.m_tall');
-	var mSimple				= jQuery('.aola_tm_portfolio_home_wrap .item.m_simple');
-	var mWide				= jQuery('.aola_tm_portfolio_home_wrap .item.m_wide');
-	var col3				= Math.floor(portfolioWidth/3);
-	var col2				= Math.floor(portfolioWidth/2);
-	var col1				= Math.floor(portfolioWidth);
-	
-	if(WW>768){
-		// laptop
-		item.css({
-			width:col3-30+'px',
-			height:Math.floor(col3*0.65)+'px',
-			margin:15+'px'
-		});
-		itemTall.css({height:Math.floor(col3*1.3)+30+'px'});
-		itemWide.css({
-			width:Math.floor(col3*2)-30+'px',
-			height:Math.floor(col3*1.3)+30+'px',
-		});
-	}else if(WW<=768 && WW > 480){
-		// ipad
-		item.css({
-			width:col2-30+'px',
-			height:Math.floor(col2*0.65)+'px',
-			margin:15+'px'
-		});
-		itemTall.css({height:Math.floor(col2*1.3)+30+'px'});
-		itemWide.css({
-			width:Math.floor(col2*2)-30+'px',
-			height:Math.floor(col2*1.3)+30+'px',
-		});
-		mTall.css({
-			width:col2-30+'px ',
-			height:Math.floor(col2*1.3)+30+'px',
-			margin:15+'px'
-		});
-		mSimple.css({
-			width:col2-30+'px',
-			height:Math.floor(col2*0.65)+'px',
-			margin:15+'px'
-		});
-		mWide.css({
-			width:col1-30+'px',
-			height:Math.floor(col2*1.3)+'px',
-			margin:15+'px'
-		});
-	}else{
-		// mobile
-		item.css({
-			width:col1-20+'px',
-			height:Math.floor(col1*0.65)+'px',
-			margin:10+'px'
-		});
-	}
+
+	container.find('.edrea_tm_progress').each(function(i) {
+		var progress 		= jQuery(this);
+		var pValue 			= parseInt(progress.data('value'), 10);
+		var pColor			= progress.data('color');
+		var pBarWrap 		= progress.find('.edrea_tm_bar_wrap');
+		var pBar 			= progress.find('.edrea_tm_bar');
+		pBar.css({width:pValue+'%', backgroundColor:pColor});
+		setTimeout(function(){pBarWrap.addClass('open');},(i*500));
+	});
 }
+jQuery('.edrea_tm_progress_wrap').each(function() {
+	"use strict";
+	var pWrap 			= jQuery(this);
+	pWrap.waypoint({handler: function(){tdProgress(pWrap);},offset:'90%'});	
+});
+
+// -----------------------------------------------------
+// -----------------    MINI BOXES    ------------------
+// -----------------------------------------------------
+
+ function edrea_tm_miniboxes(){
+	 
+  "use strict";
+	 
+  var el 			= jQuery('.edrea_tm_miniboxes');
+	 
+  if(el.length){
+   el.each(function(index, element) {
+         
+    var child		= jQuery(element).find('.edrea_tm_minibox');
+    
+    child.css({height:'auto'});
+    // Get an array of all element heights
+    
+    var W 		= jQuery(window).width();
+    if(W > 480){
+     var elementHeights = child.map(function() {return jQuery(this).outerHeight();}).get();
+    
+     // Math.max takes a variable number of arguments
+     // `apply` is equivalent to passing each height as an argument
+     var maxHeight 		= Math.max.apply(null, elementHeights);
+     
+     // Set each height to the max height
+     child.css({height:maxHeight+'px'}); 
+    }
+   });  
+  }
+ }
 
 // -----------------------------------------------------
 // --------------    ISOTOPE MASONRY    ----------------
 // -----------------------------------------------------
 
-function aola_tm_isotope(){
+function edrea_tm_isotope(){
 	
 	"use strict";
 	
@@ -345,35 +532,272 @@ function aola_tm_isotope(){
 }
 
 // -----------------------------------------------------
-// ---------------   STICKY SIDEBAR    -----------------
+// --------------------    TOTOP    --------------------
 // -----------------------------------------------------
 
-function aola_tm_sticky_sidebar(){
-
+function edrea_tm_totop(){
+	
 	"use strict";
 	
-	jQuery('.sticky_sidebar').theiaStickySidebar({
-		containerSelector: '', // The sidebar's container element. If not specified, it defaults to the sidebar's parent.
-		additionalMarginTop: 150,
-		additionalMarginBottom: 0,
-		updateSidebarHeight: true, // Updates the sidebar's height. Use this if the background isn't showing properly, for example.
-		minWidth: 768, // The sidebar returns to normal if its width is below this value. 
+	jQuery(".edrea_tm_totop").on('click', function(e) {
+		e.preventDefault();		
+		jQuery("html, body").animate({ scrollTop: 0 }, 'slow');
+		return false;
+	});
+}
+
+function edrea_tm_totop_myhide(){
+	
+	"use strict";
+	
+	var toTop		=jQuery(".edrea_tm_totop");
+	if(toTop.length){
+		var topOffSet 	=toTop.offset().top;
+		
+		if(topOffSet > 1000){
+			toTop.addClass('opened');	
+		}else{
+			toTop.removeClass('opened');
+		}
+	}
+}
+// -------------------------------------------------
+// -------------   ANIMATE TEXT  -------------------
+// -------------------------------------------------
+
+function edrea_tm_animate_text(){
+	
+	"use strict";
+	
+	var animateSpan			= jQuery('.edrea_tm_animation_text_word');
+	
+		animateSpan.typed({
+			strings: ["Edrea Kennedy", "Web Developer"],
+			loop: true,
+			startDelay: 1e3,
+			backDelay: 2e3
+		});
+}
+
+// -----------------------------------------------------
+// -------------------    POPUP BLOG    ----------------
+// -----------------------------------------------------
+
+function edrea_tm_popup_blog(){
+	"use strict";
+	var li				= jQuery('.edrea_tm_list_wrap.blog_list .inner_list');
+	var popupBox		= jQuery('#edrea_tm_popup_blog');
+	var popupInner		= popupBox.find('.inner_popup');
+	var closePopup		= popupBox.find('.close');
+	
+	li.each(function(){
+		var element		= jQuery(this);
+		var button		= element.find('.read_more a,.title_holder a,.link_news');
+		var html		= element.html();
+		var mainImage	= element.find('.news_image');
+		var imgData		= mainImage.data('url');
+		var title		= element.find('.title_holder h3');
+		var titleHref	= element.find('.title_holder h3 a').html();
+		
+		mainImage.css({backgroundImage: 'url('+imgData+')'});
+		button.on('click',function(){
+			popupBox.addClass('opened');
+			popupInner.html(html);
+			mainImage = popupInner.find('.news_image');
+			mainImage.css({backgroundImage: 'url('+imgData+')'});
+			title = popupInner.find('.title_holder h3');
+			title.html(titleHref);
+			return false;
+		});
+	});
+	closePopup.on('click',function(){
+		popupBox.removeClass('opened');
+		popupInner.html('');
+		return false;
 	});
 }
 
 // -----------------------------------------------------
-// ---------------   DATA IMAGES    --------------------
+// ---------------  POPUP BLOG SCROLL ------------------
 // -----------------------------------------------------
 
-function aola_tm_data_images(){
+function edrea_tm_popupscroll(){
 	
 	"use strict";
 	
-	var data			= jQuery('*[data-img-url]');
+	var H				= jQuery(window).height();
+	var scrollable		= jQuery('.scrollable');
+	var popupBox		= jQuery('.edrea_tm_popup_blog .inner_popup');
 	
-	data.each(function(){
+	popupBox.css({height:H-100});
+	
+	scrollable.each(function(){
+		var element		= jQuery(this);
+		var wH			= jQuery(window).height();
+		
+		element.css({height: wH-100});
+		
+		element.niceScroll({
+			touchbehavior:false,
+			cursorwidth:0,
+			autohidemode:true,
+			cursorborder:"0px solid #fff"
+		});
+	});
+}
+
+// -----------------------------------------------------
+// -------------    FIXED FOOTER -----------------------
+// -----------------------------------------------------
+
+function edrea_tm_footer_fixed(){
+	
+	"use strict";
+	
+	var content			= jQuery('.edrea_tm_content');
+	var footer			= jQuery('.edrea_tm_footer_contact_wrapper_all').outerHeight();
+	var WW				= jQuery(window).width();
+	
+	if(WW>768){
+		content.css({marginBottom:footer});
+	}
+	else{
+		content.css({marginBottom:0});
+	}
+}
+
+// -----------------------------------------------------
+// -------------    PARALLAX ANIMATION    --------------
+// -----------------------------------------------------
+
+	function edrea_tm_about_animation(){
+		
+		"use strict";
+		
+		if ($('.parallax').length > 0) { 
+		  var scene = $('.parallax').get(0);
+		  var parallax = new Parallax(scene, { 
+			relativeInput: true,
+			onReady: function() { console.log('ready!');
+		  } });
+		}
+	}
+
+// -------------------------------------------------
+// -------------  SLIDER KENBURN  ------------------
+// -------------------------------------------------
+
+function edrea_tm_kenburn_slider(){
+	
+	"use strict";
+	
+		jQuery(function() {
+			jQuery('.edrea_tm_hero_header .overlay_slider').vegas({
+			timer:false,	
+			animation: [ 'kenburnsUp',  'kenburnsLeft', 'kenburnsRight'],
+			delay:7000,
+
+			slides: [
+				{ src: 'img/hero/1.jpg' },
+				{ src: 'img/hero/2.jpg' },
+				{ src: 'img/hero/3.jpg' },
+			]
+
+		});
+	});
+}
+
+// -------------------------------------------------
+// -----------------  RIPPLE  ----------------------
+// -------------------------------------------------
+
+function edrea_tm_ripple(){
+	
+	"use strict";
+	
+	jQuery('#ripple').ripples({
+			resolution: 500,
+			dropRadius: 20,
+			perturbance: 0.04
+		});
+}
+
+// -----------------------------------------------------
+// -----------------    AUDIOBOX    --------------------
+// -----------------------------------------------------
+function edrea_tm_audiobox(){
+	
+	 "use strict";
+
+	 var curPlaying; 
+	 var speaker			= jQuery('.edrea_tm_audio_icon a'); 
+	 
+	 speaker.on('click',function(e) {
+
+		e.preventDefault();
+		 if(!speaker.hasClass('paused')){
+			 speaker.addClass('paused');
+		 }else{
+			 speaker.removeClass('paused');
+		 }
+		var song 		= jQuery('audio')[0];
+
+		if(song.paused){
+			song.play();
+			if(curPlaying) {jQuery("audio", "#"+curPlaying)[0].pause();}
+		} 
+		else {song.pause();}
+		curPlaying 		= jQuery(this).parent()[0].id;
+		 
+	});
+ }
+
+function edrea_tm_audio_off(){
+	
+	"use strict";
+	
+	var element			= jQuery('.edrea_tm_wrapper_all');
+	var dataAudio		= element.data('audio');
+	var audioBox		= jQuery('.edrea_tm_audio_wrap');
+	
+	if(dataAudio !== 'off'){
+		audioBox.find('audio').attr('autoplay','');
+	}
+	
+}
+
+// -----------------------------------------------------
+// -----------------    POPUP SERVICE    ---------------
+// -----------------------------------------------------
+
+function edrea_tm_popup_service(){
+	
+	"use strict";
+	
+	var list				= jQuery('.edrea_tm_services_wrap ul li');
+	var popupBox			= jQuery('#edrea_tm_popup_service');
+	var popupContent		= jQuery('#edrea_tm_popup_service .inner_popup');
+	var closeButton 		= jQuery('#edrea_tm_popup_service .close a');
+	
+	list.each(function(){
+		
 		var element			= jQuery(this);
-		var url				= element.data('img-url');
-		element.css({backgroundImage: 'url('+url+')'});
+		var button			= element.find('.link_service');
+		var html			= element.find('.texts_wrap').html();
+		
+		button.on('click',function(){
+			
+			popupBox.addClass('opened');
+			popupContent.html(html);
+			return false;
+		});
+		
+	});
+	
+	closeButton.on('click',function(){
+		popupBox.removeClass('opened');
+		popupContent.html('');
+		return false;
 	});
 }
+

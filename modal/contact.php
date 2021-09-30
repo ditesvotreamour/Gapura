@@ -1,7 +1,7 @@
 <?php
 
 // Put contacting email here
-$php_main_email = "marketifyhelp@gmail.com";
+$php_main_email = "designerhelp@gmail.com";
 
 //Fetching Values from URL
 $php_name = $_POST['ajax_name'];
@@ -26,15 +26,15 @@ if (filter_var($php_email, FILTER_VALIDATE_EMAIL)) {
 		$php_headers .= 'From:' . $php_email. "\r\n"; // Sender's Email
 		$php_headers .= 'Cc:' . $php_email. "\r\n"; // Carbon copy to Sender
 		
-		$php_template = '<div>Hello ' . $php_name . ',<br/>'
+		$php_template = '<div style="padding:50px;">Hello ' . $php_name . ',<br/>'
 		. 'Thank you for contacting us.<br/><br/>'
-		. '<strong>Name:</strong>  ' . $php_name . '<br/>'
-		. '<strong>Email:</strong>  ' . $php_email . '<br/>'
-		. '<strong>Message:</strong>  ' . $php_message . '<br/><br/>'
+		. '<strong style="color:#f00a77;">Name:</strong>  ' . $php_name . '<br/>'
+		. '<strong style="color:#f00a77;">Email:</strong>  ' . $php_email . '<br/>'
+		. '<strong style="color:#f00a77;">Message:</strong>  ' . $php_message . '<br/><br/>'
 		. 'This is a Contact Confirmation mail.'
 		. '<br/>'
 		. 'We will contact you as soon as possible .</div>';
-		$php_sendmessage = "<div>" . $php_template . "</div>";
+		$php_sendmessage = "<div style=\"background-color:#f5f5f5; color:#333;\">" . $php_template . "</div>";
 		
 		// message lines should not exceed 70 characters (PHP rule), so wrap it
 		$php_sendmessage = wordwrap($php_sendmessage, 70);
